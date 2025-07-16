@@ -13,8 +13,8 @@
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}" > <!-- GET 요청 -->
             <span>login</span>
         </a>
-        {% else %} <!-- POST 요청 -->
-        <form action="{% url 'accountapp:logout' %}" method="post" style="display: inline;">
+        {% else %}
+        <form action="{% url 'accountapp:logout' %}" method="post" style="display: inline;"> <!-- POST 요청 -->
             {% csrf_token %}
             <button type="submit" class="btn btn-link" style="text-decoration: none; padding: 0; margin: 0;">
                 <span>Logout</span>
