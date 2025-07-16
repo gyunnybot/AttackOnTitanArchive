@@ -4,6 +4,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls.base import reverse, reverse_lazy
 from django.views.generic import CreateView
+from django.views.generic.detail import DetailView
 
 from accountapp.models import HelloWorld
 
@@ -30,3 +31,9 @@ class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     form_class = UserCreationForm  # 계정
     success_url = reverse_lazy('accountapp:hello_world') # 계정 생성 성공 시 다시 연결될 경로
     template_name = 'accountapp/create.html'
+
+
+class AccountDetailView(DetailView):
+    model = User
+    context_object_name = 'target_user' # 타인이 특정 사용자 페이지를 방문했을 때, 특정 사용자의 정보 표시
+    template_name = 'accountapp/detail.html'
