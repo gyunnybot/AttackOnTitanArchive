@@ -1,5 +1,6 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls.base import reverse, reverse_lazy
@@ -37,3 +38,10 @@ class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user' # 타인이 특정 사용자 페이지를 방문했을 때, 특정 사용자의 정보 표시
     template_name = 'accountapp/detail.html'
+
+
+class AccountUpdateView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = 'accountapp/update.html'
+
+    success_url = reverse_lazy('accountapp:hello_world') # 비밀번호 변경 후 hello_world로 리다이렉트
