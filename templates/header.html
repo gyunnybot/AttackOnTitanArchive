@@ -1,13 +1,13 @@
 <div class="pragmatic_header">
 
     <div>
-        <h1 class="pragmatic_logo">Pragmatic</h1>
+        <h1 class="pragmatic_logo">AttackOnTitan Archive</h1>
     </div>
 
     <div>
-        <span>nav1</span>
-        <span>nav2</span>
-        <span>nav3</span>
+        <span style="margin-right: 8px;">nav1</span>
+        <span style="margin-right: 8px;">nav2</span>
+        <span style="margin-right: 8px;">nav3</span>
 
         {% if not user.is_authenticated %} <!-- 로그인이 되어있지 않다면 -->
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}" > <!-- GET 요청 -->

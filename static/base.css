@@ -1,5 +1,5 @@
 .pragmatic_logo {
-    font-family: 'Lobster', cursive;
+    font-family: 'Manufacturing Consent', cursive;
 }
 
 .pragmatic_footer_button {
@@ -11,5 +11,6 @@
 }
 
 .pragmatic_header {
+    font-family: 'Staatliches', cursive;
     text-align:center; margin: 2rem 0;
 }
