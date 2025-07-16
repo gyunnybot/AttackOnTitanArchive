@@ -7,11 +7,14 @@
     <div>
         <span style="margin-right: 8px;">nav1</span>
         <span style="margin-right: 8px;">nav2</span>
-        <span style="margin-right: 8px;">nav3</span>
 
         {% if not user.is_authenticated %}
             <a href="{% url 'accountapp:login' %}?next={{ request.path }} " style="text-decoration: none; color: black;">
-                <span>login</span>
+                <span style="margin-right: 8px;">login</span>
+            </a>
+
+            <a href="{% url 'accountapp:create' %}" style="text-decoration: none; color: black;">
+                <span>SignUp</span>
             </a>
         {% else %}
             <a href="{% url 'accountapp:detail' pk=user.pk %}" style="text-decoration: none; color: black; margin-right: 8px;">

@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls.base import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView
 
 from accountapp.models import HelloWorld
 
@@ -43,5 +44,10 @@ class AccountDetailView(DetailView):
 class AccountUpdateView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'accountapp/update.html'
-
     success_url = reverse_lazy('accountapp:hello_world') # 비밀번호 변경 후 hello_world로 리다이렉트
+
+
+class AccountDeleteView(DeleteView):
+    model = User
+    template_name = 'accountapp/delete.html'
+    success_url = reverse_lazy('accountapp:login')  # 회원탈퇴 후 login으로 리다이렉트
