@@ -15,6 +15,8 @@ from pathlib import Path
 import environ
 import os
 
+from django.urls.base import reverse_lazy
+
 env = environ.Env(
     # set casting, default value
     DEBUG = (bool, False)
@@ -33,6 +35,12 @@ environ.Env.read_env(
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+
+# Login Redirect URL
+LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
+
+# Logout Redirect URL
+LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
