@@ -17,6 +17,10 @@
                 <span>SignUp</span>
             </a>
         {% else %}
+            <a href="{% url 'accountapp:hello_world' %}" style="text-decoration: none; color: black; margin-right: 8px;">
+                <span>Home</span>
+            </a>
+
             <a href="{% url 'accountapp:detail' pk=user.pk %}" style="text-decoration: none; color: black; margin-right: 8px;">
                 <span>MyPage</span>
             </a>
