@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# superuser: admin / whdrbs9914
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),

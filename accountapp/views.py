@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
@@ -13,6 +14,7 @@ from accountapp.models import HelloWorld
 
 # Create your views here.
 
+@login_required
 def hello_world(request): # function based view
 
     if request.method == "POST":
@@ -27,6 +29,7 @@ def hello_world(request): # function based view
     else:
         hello_world_list = HelloWorld.objects.all() # reverse = 함수, reverse_lazy = 클래스
         return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
+
 
 class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     model = User  # pk 값으로 DB에서 가져오는 객체 = target_user
