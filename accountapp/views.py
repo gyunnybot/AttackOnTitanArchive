@@ -2,13 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
-from django.http.response import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls.base import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 
+from accountapp.authenticate import user_is_owner
 from accountapp.models import HelloWorld
 
 
@@ -38,53 +40,22 @@ class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     template_name = 'accountapp/create.html'
 
 
+@method_decorator(login_required, name='dispatch')
 class AccountDetailView(DetailView):
     model = User
-    context_object_name = 'target_user' # 타인이 특정 사용자 페이지를 방문했을 때, 특정 사용자의 정보 표시
+    context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        # 로그인 상태인지 확인
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden("로그인이 필요합니다.")
-
-        # # URL의 pk와 로그인한 유저 pk가 일치하는지 확인
-        # if kwargs.get('pk') != request.user.pk:
-        #     return HttpResponseForbidden("다른 사용자의 정보는 조회할 수 없습니다.")
-        # 굳이 조회까지 막을 필요가 있을까?
-
-        return super().dispatch(request, *args, **kwargs)
-
-
-class AccountUpdateView(PasswordChangeView): # 로그인한 유저 번호 request.user를 고정적으로 사용한다
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_owner, name='dispatch')
+class AccountUpdateView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'accountapp/update.html'
-    success_url = reverse_lazy('accountapp:hello_world') # 비밀번호 변경 후 hello_world로 리다이렉트
+    success_url = reverse_lazy('accountapp:hello_world')
 
-    def dispatch(self, request, *args, **kwargs):
-        # 로그인 상태인지 확인
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden("로그인이 필요합니다.")
-
-        # URL의 pk와 로그인한 유저 pk가 일치하는지 확인
-        if kwargs.get('pk') != request.user.pk:
-            return HttpResponseForbidden("다른 사용자의 비밀번호는 변경할 수 없습니다.")
-
-        return super().dispatch(request, *args, **kwargs)
-
-
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_owner, name='dispatch')
 class AccountDeleteView(DeleteView):
     model = User
     template_name = 'accountapp/delete.html'
-    success_url = reverse_lazy('accountapp:login')  # 회원탈퇴 후 login으로 리다이렉트
-
-    def dispatch(self, request, *args, **kwargs):
-        # 로그인 상태인지 확인
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden("로그인이 필요합니다.")
-
-        # URL의 pk와 로그인한 유저 pk가 일치하는지 확인
-        if kwargs.get('pk') != request.user.pk:
-            return HttpResponseForbidden("다른 사용자의 계정은 삭제할 수 없습니다.")
-
-        return super().dispatch(request, *args, **kwargs)
+    success_url = reverse_lazy('accountapp:login')
