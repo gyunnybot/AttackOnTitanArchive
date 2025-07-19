@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls.base import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -10,7 +11,7 @@ from profileapp.models import Profile
 
 # Create your views here.
 
-
+@method_decorator(login_required, 'dispatch')
 class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = 'target_profile'
@@ -29,8 +30,8 @@ class ProfileCreateView(CreateView):
         return reverse('accountapp:detail', kwargs={'pk': self.object.user.pk})
 
 
-@method_decorator(profile_ownership_required, 'get')
-@method_decorator(profile_ownership_required, 'post')
+@method_decorator(login_required, 'dispatch')
+@method_decorator(profile_ownership_required, 'dispatch')
 class ProfileUpdateView(UpdateView):
     model = Profile
     context_object_name = 'target_profile'

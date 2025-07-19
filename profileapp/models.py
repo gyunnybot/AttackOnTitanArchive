@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') # User 객체가 삭제되면 연결된 Profile도 연쇄적으로 삭제
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') # 유저와 프로필은 일대일 대응
 
     image = models.ImageField(upload_to='profile/', null=True)
 

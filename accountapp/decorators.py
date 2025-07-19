@@ -1,9 +1,11 @@
 from django.http.response import HttpResponseForbidden
 
 
-def user_is_owner(function):
-    def wrap(request, *args, **kwargs):
+def account_ownership_required(function):
+    def decorated(request, *args, **kwargs):
         if kwargs.get('pk') != request.user.pk:
-            return HttpResponseForbidden("권한이 없습니다.")
+            return HttpResponseForbidden()
+
         return function(request, *args, **kwargs)
-    return wrap
+
+    return decorated
