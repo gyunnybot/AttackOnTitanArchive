@@ -40,7 +40,7 @@ class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     template_name = 'accountapp/create.html'
 
 
-@method_decorator(login_required, name='dispatch')
+# @method_decorator(login_required, name='dispatch') # 사용자 정보 열람에는 로그인이 필요한가?
 class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user'
