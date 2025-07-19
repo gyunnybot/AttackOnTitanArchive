@@ -9,9 +9,17 @@
                 {{ target_user.date_joined|localtime }} <!--  target_user가 계정을 처음 생성한 날짜  -->
             </p>
 
-            <h2>
-                {{ target_user.username }}
-            </h2>
+            {% if target_user.profile %}
+                <h2>
+                    {{ target_user.profile.nickname }}
+                </h2>
+            {% else %}
+                <a href="{% url 'profileapp:create' %}">
+                    <h2>
+                        CreateProfile
+                    </h2>
+                </a>
+            {% endif %}
 
             {% if target_user == user %}
             <a href="{% url 'accountapp:update' pk=user.pk %}">
