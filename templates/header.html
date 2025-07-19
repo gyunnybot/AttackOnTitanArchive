@@ -5,7 +5,9 @@
     </div>
 
     <div>
-        <span style="margin-right: 8px;">nav1</span>
+        <a href="{% url 'articleapp:list' %}" style="text-decoration: none; color: black;">
+                <span style="margin-right: 8px;">Articles</span>
+            </a>
         <span style="margin-right: 8px;">nav2</span>
 
         {% if not user.is_authenticated %}
