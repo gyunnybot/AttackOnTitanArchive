@@ -9,7 +9,10 @@
             </h1>
 
             <h5>
+              <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}"
+                 style="text-decoration: none; color: inherit;">
                 {{ target_article.writer.profile.nickname }}
+              </a>
             </h5>
 
             <hr>
@@ -29,12 +32,16 @@
                 </a>
 
                 <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
-                class="btn btn-danger rounded-pill col-3 mb-3">
+                class="btn btn-dark rounded-pill col-3 mb-3">
                     Delete
                 </a>
             {% endif %}
 
             <hr style="margin-bottom: 3rem">
+
+            {% for cmt in target_article.comment.all %}
+                {% include 'commentapp/detail.html' with comment=cmt %}
+            {% endfor %}
 
             {% include 'commentapp/create.html' with article=target_article %}
 

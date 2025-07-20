@@ -1,0 +1,36 @@
+{% load bootstrap4 %}
+
+<div style="border: 1px solid; text-align: left; padding: 3%; margin: 1rem 0;
+    border-radius: 1rem; border-color: #bbb;">
+
+  <div style="display: flex; align-items: center; gap: 1rem;">
+
+    <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}"
+        style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: black;">
+      <img src="{{ comment.writer.profile.image.url }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+
+      <strong>
+        {{ comment.writer.profile.nickname }}
+      </strong>
+    </a>
+
+
+    <div style="color: gray;">
+      &nbsp
+      {{ comment.create_at }}
+    </div>
+  </div>
+
+  <div style="margin: 1rem 0;">
+    {{ comment.content }}
+  </div>
+
+  {% if comment.writer == request.user %}
+  <div style="text-align: right">
+    <a href="{% url 'commentapp:delete' pk=comment.pk %}"
+        class="btn btn-dark rounded-pill">
+      Delete
+    </a>
+  </div>
+  {% endif %}
+</div>

@@ -1,7 +1,9 @@
 from django.urls.base import reverse
-from django.views.generic.edit import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import CreateView, DeleteView
 
 from articleapp.models import Article
+from commentapp.decorators import comment_ownership_required
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
 
@@ -23,6 +25,16 @@ class CommentCreateView(CreateView):
 
         return super().form_valid(form)
 
+
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk })
+
+
+@method_decorator(comment_ownership_required, 'dispatch')
+class CommentDeleteView(DeleteView):
+    model = Comment
+    context_object_name = 'target_comment'
+    template_name = 'commentapp/delete.html'
 
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk })
