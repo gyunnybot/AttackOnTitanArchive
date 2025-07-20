@@ -4,16 +4,20 @@
     <div>
         <div style="text-align: center; max-width: 700px; margin: 4rem auto">
 
-            <h1>
+            <h2 style="margin-bottom: 2rem;">
                 {{ target_article.title }}
-            </h1>
+            </h2>
 
-            <h5>
-              <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}"
-                 style="text-decoration: none; color: inherit;">
-                {{ target_article.writer.profile.nickname }}
-              </a>
-            </h5>
+            <!-- 작성자 정보 (프로필 이미지 + 닉네임) -->
+<div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+  <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+    <img src="{{ target_article.writer.profile.image.url }}"
+         alt="Profile Image"
+         style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; margin-right: 0.5rem;">
+    <strong>{{ target_article.writer.profile.nickname }}</strong>
+  </a>
+</div>
+
 
             <hr>
 
