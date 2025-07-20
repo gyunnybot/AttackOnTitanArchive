@@ -2,12 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.urls.base import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormMixin
 from django.views.generic.list import ListView
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 # Create your views here.
@@ -33,8 +34,9 @@ class ArticleCreateView(CreateView):
 
 # @method_decorator(login_required, name='dispatch') # 다른 사용자의 아티클 열람에 로그인이 필요할까?
 # @method_decorator(article_ownership_required, name='dispatch') # 사용자 정보 열람에 계정 일치가 필요할까?
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 상속
     model = Article
+    form_class = CommentCreationForm
     context_object_name = 'target_article'
     template_name = 'articleapp/detail.html'
 
