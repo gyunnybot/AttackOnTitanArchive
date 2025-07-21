@@ -6,9 +6,12 @@
 
     <div>
         <a href="{% url 'articleapp:list' %}" style="text-decoration: none; color: black;">
-                <span style="margin-right: 8px;">Articles</span>
-            </a>
-        <span style="margin-right: 8px;">nav2</span>
+            <span style="margin-right: 8px;">Articles</span>
+        </a>
+
+        <a href="{% url 'projectapp:list' %}" style="text-decoration: none; color: black;">
+            <span style="margin-right: 8px;">Projects</span>
+        </a>
 
         {% if not user.is_authenticated %}
             <a href="{% url 'accountapp:login' %}?next={{ request.path }} " style="text-decoration: none; color: black;">
