@@ -9,9 +9,11 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.models import HelloWorld
+from articleapp.models import Article
 
 
 # Create your views here.
@@ -41,10 +43,18 @@ class AccountCreateView(CreateView): #계정 생성 클래스. class based view
 
 
 # @method_decorator(login_required, name='dispatch') # 사용자 정보 열람에 로그인이 필요할까?
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User # django에서 사용하는 기본 유저 테이블 클래스. 머신러닝 모델 선택하는 것과 비슷한 맥락
     context_object_name = 'target_user' # 127.0.0.1:8000/accounts/detail/5에서 5가 바로 target_user!
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
+
 
 
 @method_decorator(login_required, name='dispatch')
