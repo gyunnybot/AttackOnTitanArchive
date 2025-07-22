@@ -6,27 +6,27 @@
 
     <div>
         <a href="{% url 'articleapp:list' %}" style="text-decoration: none; color: black;">
-            <span style="margin-right: 8px;">Articles</span>
+            <span style="margin-right: 10px;">Articles</span>
         </a>
 
         <a href="{% url 'projectapp:list' %}" style="text-decoration: none; color: black;">
-            <span style="margin-right: 8px;">Projects</span>
+            <span style="margin-right: 10px;">Projects</span>
         </a>
 
         {% if not user.is_authenticated %}
             <a href="{% url 'accountapp:login' %}?next={{ request.path }} " style="text-decoration: none; color: black;">
-                <span style="margin-right: 8px;">login</span>
+                <span style="margin-right: 10px;">login</span>
             </a>
 
             <a href="{% url 'accountapp:create' %}" style="text-decoration: none; color: black;">
-                <span>SignUp</span>
+                <span style="margin-right: 10px;">SignUp</span>
             </a>
         {% else %}
-            <a href="{% url 'accountapp:hello_world' %}" style="text-decoration: none; color: black; margin-right: 8px;">
-                <span>Home</span>
+            <a href="{% url 'subscriptionapp:list' %}" style="text-decoration: none; color: black;">
+                <span style="margin-right: 10px;">Subscription</span>
             </a>
 
-            <a href="{% url 'accountapp:detail' pk=user.pk %}" style="text-decoration: none; color: black; margin-right: 8px;">
+            <a href="{% url 'accountapp:detail' pk=user.pk %}" style="text-decoration: none; color: black; margin-right: 10px;">
                 <span>MyPage</span>
             </a>
 
