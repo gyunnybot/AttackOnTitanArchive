@@ -33,4 +33,5 @@ urlpatterns = [
     path('comments/', include('commentapp.urls')),
     path('projects/', include('projectapp.urls')),
     path('subscriptions/', include('subscriptionapp.urls')),
+    path('pages/', include('pagesapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

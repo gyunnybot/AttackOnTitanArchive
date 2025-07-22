@@ -27,7 +27,7 @@
                     {% endif %}
                 </h2>
 
-                <h5 style="margin-top: 3rem; margin-bottom: 3rem;">
+                <h5 style="margin-top: 2rem; margin-bottom: 1.5rem;">
                     {{ target_user.profile.message }}
                 </h5>
             {% else %}
@@ -61,7 +61,7 @@
         </div>
 
         <div>
-            {% include 'snippets/list_fragment.html' with article_list=object_list %}
+            {% include 'snippets/list_fragment.html' with article_list=object_list %} <!--  내가 생성한 article만 출력  -->
         </div>
     </div>
 
