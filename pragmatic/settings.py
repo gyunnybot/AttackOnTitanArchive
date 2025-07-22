@@ -37,10 +37,10 @@ environ.Env.read_env(
 SECRET_KEY = env('SECRET_KEY')
 
 # Login Redirect URL
-LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 
 # Logout Redirect URL
-LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
+LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

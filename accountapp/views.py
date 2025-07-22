@@ -12,28 +12,10 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
-from accountapp.models import HelloWorld
 from articleapp.models import Article
 
 
 # Create your views here.
-
-@login_required
-def hello_world(request): # function based view
-
-    if request.method == "POST": # post
-
-        temp = request.POST.get('hello_world_input') # 데이터 입력
-
-        new_hello_world = HelloWorld() # 데이터베이스에 호환 가능한 HelloWorld 타입 변수 선언
-        new_hello_world.text = temp # 입력받은 데이터를 DB에 호환되도록 가공?
-        new_hello_world.save() # save
-
-        return HttpResponseRedirect(reverse('accountapp:hello_world')) # 저장 완료 후 home으로 리다이렉트
-    else: # get
-        hello_world_list = HelloWorld.objects.all() # HelloWorld 모델에 저장된 모든 데이터를 불러옵니다
-        return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list}) # 렌더링. 모든 데이터를 보여줍니다
-
 
 class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     model = User
