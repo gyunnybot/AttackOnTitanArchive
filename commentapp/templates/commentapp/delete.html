@@ -9,7 +9,7 @@
     </div>
     <form action="{% url 'commentapp:delete' pk=target_comment.pk %}" method="post">
       {% csrf_token %}
-      <input type="submit" class="btn btn-danger rounded-pill col-4 mt-4">
+      <input type="submit" class="btn btn-danger rounded-pill col-4 mt-4" value="Delete">
     </form>
   </div>
 {% endblock %}

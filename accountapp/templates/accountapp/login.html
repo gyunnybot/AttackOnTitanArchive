@@ -5,7 +5,7 @@
 
     {% if user.is_authenticated %}
         <script>
-            window.location.href = "{% url 'accountapp:hello_world' %}";
+            window.location.href = "{% url 'home' %}";
         </script>
     {% else %}
         <div style="text-align: center; max-width: 500px; margin: 4rem auto">

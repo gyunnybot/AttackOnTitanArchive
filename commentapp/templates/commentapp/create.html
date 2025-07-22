@@ -11,7 +11,7 @@
       {% bootstrap_form  form %}
 
       {% if user.is_authenticated %}
-        <input type="submit" class="btn btn-dark rounded-pill col-4 mt-4" value="Submit">
+        <input type="submit" class="btn btn-dark rounded-pill col-4 mt-4" value="Add Comment">
       {% else %}
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}"
             class="btn btn-dark rounded-pill col-6 mt-3">

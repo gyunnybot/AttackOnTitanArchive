@@ -9,12 +9,14 @@
                      style="height: 10rem; width: 10rem; border-radius: 10rem; margin-bottom: 2rem; object-fit: cover;">
 
             <h2>
-                {{ target_project.name }}
+                <strong>
+                    {{ target_project.name }}
+                </strong>
             </h2>
 
-            <h5 style="margin-top: 1rem;">
-                {{ target_project.description }}
-            </h5>
+            <h6 style="margin-top: 1rem;">
+                <p>{{ target_project.description|linebreaksbr }}</p>
+            </h6>
 
         </div>
 
@@ -37,6 +39,22 @@
         <div>
             {% include 'snippets/list_fragment.html' with article_list=object_list %}
         </div>
+
+        {% if user == target_project.writer %}
+            <div style="text-align: center;">
+                <a href="{% url 'projectapp:update' pk=target_project.pk %}"
+                   class="btn btn-primary rounded-pill mt-5 mb-3"
+                   style="margin-right: 1rem;">
+                    Update
+                </a>
+
+                <a href="{% url 'projectapp:delete' pk=target_project.pk %}"
+                     class="btn btn-dark rounded-pill mt-5 mb-3">
+                    Delete
+                </a>
+            </div>
+
+        {% endif %}
     </div>
 
 {% endblock %}

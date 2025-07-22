@@ -49,12 +49,12 @@
                            style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem; text-decoration: none;
                                 margin-right: 5px;"
                     href="{% url 'accountapp:update' pk=user.pk %}">
-                settings
+                vpn_key
             </a>
             <a class="material-icons"
-                           style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem; text-decoration: none;";
+                           style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .4rem; text-decoration: none;";
                     href="{% url 'accountapp:delete' pk=user.pk %}">
-                delete
+                delete_forever
             </a>
             {% endif %}
 
