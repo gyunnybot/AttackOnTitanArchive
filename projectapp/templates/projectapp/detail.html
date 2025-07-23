@@ -25,12 +25,12 @@
                 {% if not subscription %}
                     <a href="{% url 'subscriptionapp:subscribe' %}?project_pk={{ target_project.pk }}"
                         class="btn btn-primary rounded-pill px-3">
-                        Subscribe
+                        구독
                     </a>
                 {% else %}
                     <a href="{% url 'subscriptionapp:subscribe' %}?project_pk={{ target_project.pk }}"
                         class="btn btn-dark rounded-pill px-3">
-                        Unsubscribe
+                        구독 취소
                     </a>
                 {% endif %}
             {% endif %}
@@ -45,12 +45,12 @@
                 <a href="{% url 'projectapp:update' pk=target_project.pk %}"
                    class="btn btn-primary rounded-pill mt-5 mb-3"
                    style="margin-right: 1rem;">
-                    Update
+                    업데이트
                 </a>
 
                 <a href="{% url 'projectapp:delete' pk=target_project.pk %}"
                      class="btn btn-dark rounded-pill mt-5 mb-3">
-                    Delete
+                    프로젝트 삭제
                 </a>
             </div>
 

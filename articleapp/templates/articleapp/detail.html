@@ -38,25 +38,42 @@
 
         {% if user == target_article.writer %}
             <a href="{% url 'articleapp:update' pk=target_article.pk %}"
-               class="btn btn-primary rounded-pill col-3 mb-3"
+               class="btn btn-secondary rounded-pill col-3 mt-3 mb-3"
                style="margin-right: 1rem;">
-                Update
+                업데이트
             </a>
 
             <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
-               class="btn btn-dark rounded-pill col-3 mb-3">
-                Delete
+               class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
+                게시물 삭제
             </a>
         {% endif %}
 
-        <hr style="margin-bottom: 3rem">
+        <hr style="margin-top: 1.5rem; margin-bottom: 0rem;">
 
-        {% for cmt in target_article.comment.all %}
-        {% include 'commentapp/detail.html' with comment=cmt %}
-        {% endfor %}
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <!-- 이전 게시글 버튼 -->
+        {% if prev_article %}
+            <a href="{% url 'articleapp:detail' pk=prev_article.pk %}"
+               class="btn btn-outline-secondary rounded-pill px-4 py-2 mt-4 me-2">
+                이전 게시물
+            </a>
+        {% endif %}
+
+        <!-- 다음 게시글 버튼 -->
+        {% if next_article %}
+            <a href="{% url 'articleapp:detail' pk=next_article.pk %}"
+               class="btn btn-outline-primary rounded-pill px-4 py-2 mt-4">
+                다음 게시물
+            </a>
+        {% endif %}
+        </div>
 
         {% include 'commentapp/create.html' with article=target_article %}
 
+        {% for cmt in target_article.comment.all %}
+            {% include 'commentapp/detail.html' with comment=cmt %}
+        {% endfor %}
     </div>
 </div>
 

@@ -40,6 +40,25 @@ class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 
     context_object_name = 'target_article'
     template_name = 'articleapp/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_article = self.get_object()
+
+        # 다음 게시물 (같은 프로젝트에서 pk가 큰 것 중 가장 작은)
+        next_article = Article.objects.filter(
+            project=current_article.project,
+            pk__gt=current_article.pk
+        ).order_by('pk').first()
+
+        # 이전 게시물 (같은 프로젝트에서 pk가 작은 것 중 가장 큰)
+        prev_article = Article.objects.filter(
+            project=current_article.project,
+            pk__lt=current_article.pk
+        ).order_by('-pk').first()
+
+        context['next_article'] = next_article
+        context['prev_article'] = prev_article
+        return context
 
 @method_decorator(login_required, 'dispatch')
 @method_decorator(article_ownership_required, 'dispatch')
