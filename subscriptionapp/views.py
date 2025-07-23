@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from articleapp.models import Article
 from projectapp.models import Project
 from subscriptionapp.models import Subscription
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -35,18 +36,13 @@ class SubscriptionView(RedirectView):
         return super(SubscriptionView, self).get(request, *args, **kwargs)
 
 
-
-@method_decorator(login_required, 'get')
+@method_decorator(login_required, name='dispatch')
 class SubscriptionListView(ListView):
-    model = Article
+    model = Project
+    context_object_name = 'project_list'
     template_name = 'subscriptionapp/list.html'
-    context_object_name = 'article_list'
-
     paginate_by = 10
 
     def get_queryset(self):
-        projects = Subscription.objects.filter(user=self.request.user).values_list('project') # 구독한 프로젝트 리스트화
-
-        article_list = Article.objects.filter(project__in=projects) # projects = 구독한 프로젝트 리스트이므로 해당 프로젝트 내 아티클을 리스트화
-
-        return article_list
+        subscriptions = Subscription.objects.filter(user=self.request.user).values_list('project', flat=True)
+        return Project.objects.filter(pk__in=subscriptions)
