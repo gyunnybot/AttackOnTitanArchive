@@ -43,13 +43,13 @@
         {% if user == target_project.writer %}
             <div style="text-align: center;">
                 <a href="{% url 'projectapp:update' pk=target_project.pk %}"
-                   class="btn btn-primary rounded-pill mt-5 mb-3"
+                   class="btn btn-secondary rounded-pill col-1 mt-5 mb-3"
                    style="margin-right: 1rem;">
                     업데이트
                 </a>
 
                 <a href="{% url 'projectapp:delete' pk=target_project.pk %}"
-                     class="btn btn-dark rounded-pill mt-5 mb-3">
+                     class="btn btn-dark rounded-pill col-1 mt-5 mb-3">
                     프로젝트 삭제
                 </a>
             </div>

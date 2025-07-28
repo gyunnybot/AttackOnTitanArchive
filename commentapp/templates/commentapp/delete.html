@@ -4,12 +4,14 @@
   <div style="text-align: center; max-width: 500px; margin: 4rem auto">
     <div class="mb-4">
       <h4 style="margin-bottom: 2rem">Delete Comment : {{ target_comment.content }}</h4>
-      <h6>Once you delete a comment, there is no going back.</h6>
-      <h6>Please be certain.</h6>
+      <h6>
+        해당 댓글을 삭제하면 복구할 수 없습니다.<br><br>
+        정말로 삭제하시겠습니까?
+      </h6>
     </div>
     <form action="{% url 'commentapp:delete' pk=target_comment.pk %}" method="post">
       {% csrf_token %}
-      <input type="submit" class="btn btn-danger rounded-pill col-4 mt-4" value="Delete">
+      <input type="submit" class="btn btn-danger rounded-pill col-2 mt-4" value="삭제">
     </form>
   </div>
 {% endblock %}

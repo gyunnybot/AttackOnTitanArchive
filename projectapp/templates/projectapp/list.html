@@ -36,15 +36,15 @@
     <script src="{% static 'js/magicgrid.js' %}"></script>
   {% else %}
     <div class="text-center">
-      <h1>No projects yet.</h1>
+      <br><h5>아직 프로젝트가 없습니다!</h5><br>
     </div>
   {% endif %}
 
   {% include 'snippets/pagination.html' with page_obj=page_obj %}
 
   <div style="text-align: center">
-    <a href="{% url 'projectapp:create' %}" class="btn btn-dark rounded-pill col-2 mt-3 mb-3 px-3">
-      Create Project
+    <a href="{% url 'projectapp:create' %}" class="btn btn-dark rounded-pill col-1.5 mt-3 mb-3 px-3">
+      프로젝트 생성
     </a>
   </div>
 

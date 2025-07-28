@@ -4,13 +4,13 @@
 {% block content %}
   <div style="text-align: center; max-width: 500px; margin: 4rem auto">
     <div class="mb-4">
-      <h4>Change Password</h4>
+      <h4>비밀번호 변경</h4>
     </div>
     <form action="{% url 'accountapp:update' pk=user.pk %}" method="post">
       {% csrf_token %}
 
       {% bootstrap_form  form %}
-      <input type="submit" class="btn btn-dark rounded-pill col-4 mt-4">
+      <input type="submit" class="btn btn-dark rounded-pill col-2 mt-4" value="변경">
     </form>
   </div>
 {% endblock %}

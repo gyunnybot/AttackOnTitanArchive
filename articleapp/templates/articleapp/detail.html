@@ -38,13 +38,13 @@
 
         {% if user == target_article.writer %}
             <a href="{% url 'articleapp:update' pk=target_article.pk %}"
-               class="btn btn-secondary rounded-pill col-3 mt-3 mb-3"
+               class="btn btn-secondary rounded-pill col-2 mt-3 mb-3"
                style="margin-right: 1rem;">
                 업데이트
             </a>
 
             <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
-               class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
+               class="btn btn-dark rounded-pill col-2 mt-3 mb-3">
                 게시물 삭제
             </a>
         {% endif %}

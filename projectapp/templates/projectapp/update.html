@@ -3,11 +3,11 @@
 
 {% block content %}
   <div style="max-width: 500px; margin: 4rem auto; text-align: center;">
-    <h4>Update Project</h4>
+    <h4>프로젝트 업데이트</h4>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
-      <button type="submit" class="btn btn-dark rounded-pill mt-4">Update</button>
+      <button type="submit" class="btn btn-dark rounded-pill col-3 mt-4">업데이트</button>
     </form>
   </div>
 {% endblock %}
