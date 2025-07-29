@@ -16,6 +16,13 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
+
+                    {% if request.GET.next == "/accounts/create/" %}
+                        <input type="hidden" name="next" value="">
+                    {% elif request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+
                     <input type="submit" class="btn btn-dark rounded-pill col-4 mt-4">
                 </form>
             </div>

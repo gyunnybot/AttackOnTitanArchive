@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
@@ -46,6 +47,12 @@ class AccountUpdateView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'accountapp/update.html'
     success_url = reverse_lazy('accountapp:login')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        logout(self.request)  # 비밀번호 변경 후 로그아웃
+
+        return response
 
 
 @method_decorator(login_required, name='dispatch')
