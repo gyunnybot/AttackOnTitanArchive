@@ -20,7 +20,7 @@ from articleapp.models import Article
 class AccountCreateView(CreateView): #계정 생성 클래스. class based view
     model = User
     form_class = UserCreationForm  # 계정
-    success_url = reverse_lazy('accountapp:hello_world') # 계정 생성 성공 시 다시 연결될 경로
+    success_url = reverse_lazy('accountapp:login') # 계정 생성 성공 시 다시 연결될 경로
     template_name = 'accountapp/create.html'
 
 
@@ -45,7 +45,7 @@ class AccountUpdateView(PasswordChangeView):
     model = User
     form_class = PasswordChangeForm
     template_name = 'accountapp/update.html'
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('accountapp:login')
 
 
 @method_decorator(login_required, name='dispatch')
