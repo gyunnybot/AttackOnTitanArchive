@@ -2,7 +2,9 @@
 
 ## 📌 개요
 
-이 프로젝트는 Django 프레임워크를 기반으로 한 Pinterest 타입의 이미지 기반 게시판 웹 애플리케이션입니다. 사용자는 회원가입 및 로그인 후 게시글(이미지 포함)을 등록하고, 댓글을 작성할 수 있으며, 게시글은 프로젝트(그룹) 단위로 관리됩니다.
+이 프로젝트는 Django 프레임워크를 사용한 Pinterest 타입의 이미지 기반 게시판 웹 애플리케이션입니다.
+
+사용자는 회원가입 및 로그인 후 게시글(이미지 포함)을 등록하고 댓글을 작성할 수 있으며, 게시글은 프로젝트(그룹) 단위로 관리됩니다.
 
 각 게시물은 카드 형식으로 나열되며, `MagicGrid.js`를 사용하여 실제 핀터레스트와 유사한 유동적인 그리드 레이아웃을 구현했습니다.
 
@@ -32,13 +34,13 @@
 * 게시글 리스트는 카드 형태로 나열
 * `card_project.html`과 같은 base snippet 파일을 만들어 재사용 가능한 카드 컴포넌트로 구성
 * Bootstrap 기반으로 반응형 UI 구현
-<img width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" />
+<br><br><img style="border: 1px solid #000;" width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" /><br><br>
 
 ### 💬 5. 댓글 기능
 
 * 게시글 하단에 댓글 생성, 수정, 삭제 기능 구현
 * 로그인된 사용자만 댓글 작성 가능
-<img width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" />
+<br><br><img style="border: 1px solid #000;" width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
 
 ### 🔲 6. MagicGrid를 이용한 레이아웃 정렬
 
