@@ -62,8 +62,8 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-@method_decorator(login_required, name='dispatch') # 아티클 열람에 로그인이 필요할까? 로그인이 없다면 회원가입을 하지 않을 것이므로 필요할 듯
-# @method_decorator(article_ownership_required, name='dispatch') # 타 유저의 게시물 열람에 반드시 계정 일치가 필요할까?
+@method_decorator(login_required, name='dispatch') # 로그인이 없다면 회원가입을 하지 않을 것이므로 필요할 듯..
+# @method_decorator(article_ownership_required, name='dispatch') # 게시물 열람에 반드시 계정 일치가 필요할까?
 class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 상속
     model = Article
     form_class = CommentCreationForm
@@ -126,7 +126,8 @@ class ArticleListView(ListView):
 * 게시글 하단에 댓글 생성, 삭제 기능 구현
 * 로그인된 사용자만 댓글 작성 가능
 
-<br><br><img width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
+<br><br><img width="669" height="841" alt="image"
+src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
 
 ```python
 # import...
