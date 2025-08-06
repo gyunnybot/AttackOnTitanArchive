@@ -35,18 +35,10 @@
 * `card_project.html`과 같은 base snippet 파일을 만들어 재사용 가능한 카드 컴포넌트로 구성
 * Bootstrap 기반으로 반응형 UI 구현
 
-```python
-from django.contrib.auth.decorators import login_required
-from django.urls.base import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormMixin
-from django.views.generic.list import ListView
+<br><br><img width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" /><br><br>
 
-from articleapp.decorators import article_ownership_required
-from articleapp.forms import ArticleCreationForm
-from articleapp.models import Article
-from commentapp.forms import CommentCreationForm
+```python
+# import...
 
 
 # Create your views here.
@@ -128,26 +120,19 @@ class ArticleListView(ListView):
     template_name = 'articleapp/list.html'
     paginate_by = 25
 ```
-<br><br><img width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" /><br><br>
 
 ### 5. 댓글 기능
 
 * 게시글 하단에 댓글 생성, 삭제 기능 구현
 * 로그인된 사용자만 댓글 작성 가능
 
-```python
-from django.contrib.auth.decorators import login_required
-from django.urls.base import reverse
-from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+<br><br><img width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
 
-from articleapp.models import Article
-from commentapp.decorators import comment_ownership_required
-from commentapp.forms import CommentCreationForm
-from commentapp.models import Comment
-from commentapp.forms import CommentForm
+```python
+# import...
 
 # Create your views here.
+
 
 @method_decorator(login_required, 'dispatch')
 @method_decorator(comment_ownership_required, 'dispatch')
@@ -191,7 +176,6 @@ class CommentDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk })
 ```
-<br><br><img width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
 
 ### 6. MagicGrid를 이용한 레이아웃 정렬
 
