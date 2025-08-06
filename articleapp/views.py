@@ -23,7 +23,7 @@ class ArticleCreateView(CreateView):
     # 클라이언트 본인의 아티클만 생성할 수 있도록 서버에서 관리
     def form_valid(self, form):
         temp_article = form.save(commit=False)
-        temp_article.writer = self.request.user
+        temp_article.writer = self.request.user # 작성자(writer)를 현재 로그인한 사용자로 강제 지정
         temp_article.save()
 
         return super().form_valid(form)
@@ -32,8 +32,8 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-# @method_decorator(login_required, name='dispatch') # 다른 사용자의 아티클 열람에 로그인이 필요할까?
-# @method_decorator(article_ownership_required, name='dispatch') # 사용자 정보 열람에 계정 일치가 필요할까?
+@method_decorator(login_required, name='dispatch') # 아티클 열람에 로그인이 필요할까? 로그인이 없다면 회원가입을 하지 않을 것이므로 필요할 듯
+# @method_decorator(article_ownership_required, name='dispatch') # 타 유저의 게시물 열람에 반드시 계정 일치가 필요할까?
 class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 상속
     model = Article
     form_class = CommentCreationForm
@@ -58,7 +58,9 @@ class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 
 
         context['next_article'] = next_article
         context['prev_article'] = prev_article
+
         return context
+
 
 @method_decorator(login_required, 'dispatch')
 @method_decorator(article_ownership_required, 'dispatch')
@@ -80,9 +82,9 @@ class ArticleDeleteView(DeleteView):
     success_url = reverse_lazy('articleapp:list')
     template_name = 'articleapp/delete.html'
 
-
+# 로그인 없이도 메인 화면
 class ArticleListView(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
-    paginate_by = 10
+    paginate_by = 25

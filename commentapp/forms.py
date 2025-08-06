@@ -11,7 +11,13 @@ class CommentCreationForm(ModelForm):
         widgets = { 
             'content': forms.Textarea(attrs={
                 'rows': 2,
-                'placeholder': 'Write a comment...',
+                'placeholder': '댓글을 입력하세요...',
                 'style': 'resize: vertical;'
             }),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']  # 댓글 폼에 필요한 필드만 넣기
