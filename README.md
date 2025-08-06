@@ -38,7 +38,7 @@
 
 ### 5. 댓글 기능
 
-* 게시글 하단에 댓글 생성, 수정, 삭제 기능 구현
+* 게시글 하단에 댓글 생성, 삭제 기능 구현
 * 로그인된 사용자만 댓글 작성 가능
 <br><br><img width="669" height="841" alt="image" src="https://github.com/user-attachments/assets/c3e6d8df-3e87-4266-a1b1-892b80b94f7a" /><br><br>
 
