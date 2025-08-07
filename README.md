@@ -35,7 +35,9 @@
 * `card_project.html`과 같은 base snippet 파일을 만들어 재사용 가능한 카드 컴포넌트로 구성
 * Bootstrap 기반으로 반응형 UI 구현
 
-<br><br><img width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" /><br><br>
+<br><br><p align="center">
+  <img width="1331" height="798" alt="image" src="https://github.com/user-attachments/assets/2b3f051e-3851-449b-8982-a83af41ec725" />
+</p><br><br>
 
 ```python
 # import...
@@ -62,9 +64,9 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-@method_decorator(login_required, name='dispatch') # 로그인이 없다면 회원가입을 하지 않을 것이므로 필요할 듯..
-# @method_decorator(article_ownership_required, name='dispatch') # 게시물 열람에 반드시 계정 일치가 필요할까?
-class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 다중 상속
+@method_decorator(login_required, name='dispatch') # 로그인이 없다면 회원가입을 하지 않을 것임...
+# @method_decorator(article_ownership_required, name='dispatch') # 반드시 계정이 일치해야 하나?
+class ArticleDetailView(DetailView, FormMixin): # FormMixin을 활용한 article, comment 다중 상속
     model = Article
     form_class = CommentCreationForm
     context_object_name = 'target_article'
@@ -113,7 +115,7 @@ class ArticleDeleteView(DeleteView):
     template_name = 'articleapp/delete.html'
 
 
-# 로그인 없이도 메인 화면은 볼 수 있도록 설정
+# 로그인 없이도 메인 화면 자체는 구경할 수 있도록 설정
 class ArticleListView(ListView):
     model = Article
     context_object_name = 'article_list'
@@ -123,8 +125,10 @@ class ArticleListView(ListView):
 
 ### 5. 댓글 기능
 
-* 게시글 하단에 댓글 생성, 삭제 기능 구현
+* 게시글 하단에 댓글 생성, 수정, 삭제 기능 구현
 * 로그인된 사용자만 댓글 작성 가능
+
+2025.08.07 : 댓글 수정 기능이 추가되었습니다!
 
 <br><br><p align="center">
   <img width="669" height="841" alt="image"
@@ -244,6 +248,7 @@ myproject/
 ## 시연
 
 * 프로젝트는 로컬 개발환경 기준 `127.0.0.1:8000`에서 구동되며, 브라우저 탭 이름은 `head.html`에서 설정된 `<title>` 태그에 따라 동적으로 변경 가능
+* 실제 배포는 최종적인 접속 로직 테스트 후 Docker, AWS 기반으로 진행 예정
 
 ---
 
